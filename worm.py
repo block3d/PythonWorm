@@ -68,7 +68,7 @@ def spreadAndExecute(sshClient):
 # 3 = probably the server is down or is not running SSH
 ###########################################################
 def tryCredentials(host, userName, password, sshClient):
-    print("Try to connect to host " + host + " using" + userName + " and " + password)
+    print("Try to connect to host " + host + " using " + userName + " and " + password)
     try:
         sshClient.connect(host, username=userName, password=password)
         print("Opened a connection to the victim's system!")
